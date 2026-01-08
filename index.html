@@ -1,129 +1,159 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tailwind To Do </title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tailwind To Do </title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    /* Morph / glass card + transitions */
-    .morph-card{
-      background: linear-gradient(135deg, rgba(17,24,39,0.6), rgba(17,24,39,0.5));
-      border: 1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 6px 18px rgba(2,6,23,0.5);
-      transition: transform .18s ease, box-shadow .18s ease;
-      backdrop-filter: blur(6px) saturate(120%);
-    }
-    .morph-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 50px rgba(2,6,23,0.6); }
-    .morph-badge{ font-size: 0.7rem; padding: .2rem .45rem; border-radius: 999px; }
-    .clock-animate{ animation: pulse 2s infinite; }
-  </style>
+    <style>
+        /* Morph / glass card + transitions */
+        .morph-card {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.5));
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5);
+            transition: transform .18s ease, box-shadow .18s ease;
+            backdrop-filter: blur(6px) saturate(120%);
+        }
+
+        .morph-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(2, 6, 23, 0.6);
+        }
+
+        .morph-badge {
+            font-size: 0.7rem;
+            padding: .2rem .45rem;
+            border-radius: 999px;
+        }
+
+        .clock-animate {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
+
 <body class="bg-gradient-to-b from-slate-900 to-slate-800 min-h-screen font-sans text-gray-100">
-  <div class="max-w-4xl mx-auto p-6">
+    <div class="max-w-4xl mx-auto p-6">
 
-    <header class="mb-6 text-center">
-      <h1 class="text-2xl md:text-3xl font-semibold">Task Manager</h1>
-     
-    </header>
-      
+        <header class="mb-6 text-center">
+            <h1 class="text-2xl md:text-3xl font-semibold">Task Manager</h1>
 
-    <main>
-      <!-- add task -->
-      <section class="p-5 rounded-lg mb-6 morph-card">
-        <form id="taskForm" class="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
-          <div class="md:col-span-2">
-            <label class="text-sm font-medium text-gray-300">Task</label>
-            <input id="taskInput" type="text" placeholder="e.g. Buy groceries" class="mt-1 block w-full border border-slate-700 rounded px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400" required />
-          </div>
+        </header>
 
-          <div>
-            <label class="text-sm font-medium text-gray-300">Date</label>
-            <input id="dateInput" type="date" class="mt-1 block w-full border border-slate-700 rounded px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400" />
-          </div>
 
-          <div>
-            <label class="text-sm font-medium text-gray-300">Repeat</label>
-            <select id="repeatSelect" class="mt-1 block w-full bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none whitespace-nowrap">
-              <option value="none">None</option>
-              <option value="daily">Daily</option>
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-            </select>
-          </div>
+        <main>
+            <!-- add task -->
+            <section class="p-5 rounded-lg mb-6 morph-card">
+                <form id="taskForm" class="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+                    <div class="md:col-span-2">
+                        <label class="text-sm font-medium text-gray-300">Task</label>
+                        <input id="taskInput" type="text" placeholder="e.g. Buy groceries"
+                            class="mt-1 block w-full border border-slate-700 rounded px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            required />
+                    </div>
 
-          <div class="md:col-span-4 flex gap-3 mt-2">
-            <button type="button" class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700">Add Task</button>
-            <button type="button" id="clearBtn" class="bg-slate-700/40 text-gray-100 px-4 py-2 rounded hover:opacity-90">Clear</button>
-            <div class="ml-auto text-sm text-gray-300 pt-2">Interactive preview</div>
-          </div>
-        </form>
-      </section>
+                    <div>
+                        <label class="text-sm font-medium text-gray-300">Date</label>
+                        <input id="dateInput" type="date"
+                            class="mt-1 block w-full border border-slate-700 rounded px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                    </div>
 
-      <!-- filters -->
-      <section class="p-4 rounded-lg mb-6 morph-card">
-        <div class="flex flex-col md:flex-row gap-3 md:items-center">
-          <div class="flex-1">
-            <label class="text-sm font-medium text-gray-300">Search</label>
-            <input id="searchInput" type="search" placeholder="Filter by name" class="mt-1 block w-full border border-slate-700 rounded px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400" />
-          </div>
+                    <div>
+                        <label class="text-sm font-medium text-gray-300">Repeat</label>
+                        <select id="repeatSelect"
+                            class="mt-1 block w-full bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none whitespace-nowrap">
+                            <option value="none">None</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
 
-          <div class="w-44">
-            <label class="text-sm font-medium text-gray-300">Status</label>
-            <select id="statusFilter" class="mt-1 block w-full bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none whitespace-nowrap">
-              <option value="all">All</option>
-              <option value="active">Active</option>
-              <option value="completed">Completed</option>
-            </select>
-          </div>
+                    <div class="md:col-span-4 flex gap-3 mt-2">
+                        <button type="button"
+                            class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700">Add
+                            Task</button>
+                        <button type="button" id="clearBtn"
+                            class="bg-slate-700/40 text-gray-100 px-4 py-2 rounded hover:opacity-90">Clear</button>
+                        <div class="ml-auto text-sm text-gray-300 pt-2">Interactive preview</div>
+                    </div>
+                </form>
+            </section>
 
-          <div class="w-44">
-            <label class="text-sm font-medium text-gray-300">Sort</label>
-            <select id="sortSelect" class="mt-1 block w-full bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none whitespace-nowrap">
-              <option value="created_desc">Newest</option>
-              <option value="created_asc">Oldest</option>
-              <option value="name_asc">Name A→Z</option>
-              <option value="name_desc">Name Z→A</option>
-            </select>
-          </div>
+            <!-- filters -->
+            <section class="p-4 rounded-lg mb-6 morph-card">
+                <div class="flex flex-col md:flex-row gap-3 md:items-center">
+                    <div class="flex-1">
+                        <label class="text-sm font-medium text-gray-300">Search</label>
+                        <input id="searchInput" type="search" placeholder="Filter by name"
+                            class="mt-1 block w-full border border-slate-700 rounded px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                    </div>
+
+                    <div class="w-44">
+                        <label class="text-sm font-medium text-gray-300">Status</label>
+                        <select id="statusFilter"
+                            class="mt-1 block w-full bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none whitespace-nowrap">
+                            <option value="all">All</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="w-44">
+                        <label class="text-sm font-medium text-gray-300">Sort</label>
+                        <select id="sortSelect"
+                            class="mt-1 block w-full bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none whitespace-nowrap">
+                            <option value="created_desc">Newest</option>
+                            <option value="created_asc">Oldest</option>
+                            <option value="name_asc">Name A→Z</option>
+                            <option value="name_desc">Name Z→A</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- tasks list -->
+            <section class="p-4 rounded-lg morph-card">
+                <h2 class="text-lg font-medium mb-3">Tasks</h2>
+
+                <ul id="taskList" class="space-y-3">
+                    <!-- items injected here -->
+                </ul>
+
+                <p id="emptyState" class="mt-4 text-gray-400">No tasks yet — add one from the form above.</p>
+            </section>
+        </main>
+
+        <!-- edit modal (inline, hidden) -->
+        <div id="editPanel" class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center p-4 z-50">
+            <div class="bg-slate-900 rounded-lg w-full max-w-lg p-5 morph-card">
+                <h3 class="text-lg font-medium mb-3">Edit Task</h3>
+                <form id="editForm" class="grid grid-cols-1 gap-3">
+                    <input id="editTaskInput" type="text"
+                        class="border border-slate-700 rounded px-3 py-2 bg-transparent" />
+                    <label class="text-sm font-medium text-gray-300">Date</label>
+                    <input id="editDateInput" type="date"
+                        class="border border-slate-700 rounded px-3 py-2 bg-transparent" />
+                    <select id="editRepeatSelect"
+                        class="bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 appearance-none whitespace-nowrap">
+                        <option value="none">None</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" id="cancelEdit"
+                            class="px-4 py-2 rounded bg-slate-700/40 text-gray-100 hover:opacity-90">Cancel</button>
+                        <button type="button"
+                            class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </section>
 
-      <!-- tasks list -->
-      <section class="p-4 rounded-lg morph-card">
-        <h2 class="text-lg font-medium mb-3">Tasks</h2>
 
-        <ul id="taskList" class="space-y-3">
-          <!-- items injected here -->
-        </ul>
-
-        <p id="emptyState" class="mt-4 text-gray-400">No tasks yet  add one from the form above.</p>
-      </section>
-    </main>
-
-    <!-- edit modal (inline, hidden) -->
-    <div id="editPanel" class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center p-4 z-50">
-      <div class="bg-slate-900 rounded-lg w-full max-w-lg p-5 morph-card">
-        <h3 class="text-lg font-medium mb-3">Edit Task</h3>
-        <form id="editForm" class="grid grid-cols-1 gap-3">
-          <input id="editTaskInput" type="text" class="border border-slate-700 rounded px-3 py-2 bg-transparent" />
-          <label class="text-sm font-medium text-gray-300">Date</label>
-          <input id="editDateInput" type="date" class="border border-slate-700 rounded px-3 py-2 bg-transparent" />
-          <select id="editRepeatSelect" class="bg-slate-800 text-gray-100 border border-slate-600 rounded px-3 py-2 appearance-none whitespace-nowrap">
-            <option value="none">None</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-          </select>
-          <div class="flex gap-3 justify-end">
-            <button type="button" id="cancelEdit" class="px-4 py-2 rounded bg-slate-700/40 text-gray-100 hover:opacity-90">Cancel</button>
-            <button type="button" class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700">Save</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  
 </body>
+
 </html>
